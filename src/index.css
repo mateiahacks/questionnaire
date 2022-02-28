@@ -1,13 +1,62 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Rowdies:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;1,100&family=PT+Sans:wght@400;700&family=Rowdies:wght@300;400;700&display=swap');
+
+html, body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  height: 100%;
+  font-weight: 300;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root {
+  --redberryColor: #FE3B1F;
+}
+
+.fill-screen {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.intro {
+  font-family: 'Montserrat', sans-serif;
+  background: black url('images/stars.png') no-repeat fixed center;
+  opacity: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.intro > h1 {
+  font-family: 'PT sans', sans-serif;
+  font-family: 'Rowdies', cursive;
+  color: var(--redberryColor);
+  font-weight: 400;
+  font-size: 90px;
+  margin-bottom: 130px;
+  margin-top: 150px;
+}
+
+.intro > a {
+  color: #FFFFFF;
+  text-decoration: underline;
+  cursor: pointer;
+  line-height: 30px;
+  font-size: 20px;
+}
+
+.btn {
+  color: white;
+  font-size: 22px;
+  background-color: var(--redberryColor);
+  padding: 20px 80px 20px 80px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.btn-start {
+  margin-bottom: 30px;
 }
