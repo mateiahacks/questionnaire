@@ -5,7 +5,7 @@ import next from '../images/Next.png'
 import ellipse1 from '../images/Ellipse1.png';
 import ellipse2 from '../images/Ellipse2.png';
 
-const Coordinates = ({toggleSkills, isCoordinates, toggleCoordinates}) => {
+const Coordinates = ({toggleStarted, toggleSkills, isCoordinates, toggleCoordinates}) => {
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -15,6 +15,11 @@ const Coordinates = ({toggleSkills, isCoordinates, toggleCoordinates}) => {
     const onNext = () => {
         toggleCoordinates();
         toggleSkills();
+    }
+
+    const onPrev = () => {
+        toggleCoordinates();
+        toggleStarted();
     }
 
     return <div>{isCoordinates && (
@@ -28,7 +33,7 @@ const Coordinates = ({toggleSkills, isCoordinates, toggleCoordinates}) => {
                         <input className='form-input' type="text" placeholder=''/>
                     </form>
                     <div className="switcher">
-                        <img src={previous} />
+                        <img onClick={onPrev} src={previous} />
                         <img src={ellipse1} alt="" />
                         <img src={ellipse2} alt="" />
                         <img src={ellipse2} alt="" />

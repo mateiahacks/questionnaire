@@ -5,39 +5,38 @@ import ellipse1 from '../images/Ellipse1.png';
 import ellipse2 from '../images/Ellipse2.png';
 import vector from '../images/Vector.png';
 import remove from '../images/Remove.png'
+import { skillsMap } from './skillsMap';
 
-const Skills = ({allSkills, addSkill, showSkills, toggleCoordinates, toggleSkills}) => {
+const Skills = ({onDelete, allSkills, addSkill, showSkills, toggleCoordinates, toggleSkills, toggleCovid}) => {
     const [skillsData, setSkillsData] = useState([]);
     const [skill, setSkill] = useState("Skills");
+    const skillMap = skillsMap();
     const [showDrop, setShowDrop] = useState(false);
-    const [exp, setExp] = useState("");
-    const [newSkill, setNewSkill] = useState({
-        id: 0,
-        experience: 0
-    });
+    const [exp, setExp] = useState(0);
+
+    const [renderExp, setRenderExp] = useState(0);
+
+    const getSkills = async () => {
+        const res = await fetch("https://bootcamp-2022.devtest.ge/api/skills");
+        const data = await res.json();
+        console.log(data);
+        setSkillsData(data);
+    }
 
     useEffect(() => {
-        const getSkills = async () => {
-            const res = await fetch("https://bootcamp-2022.devtest.ge/api/skills");
-            const data = await res.json();
-            console.log(data);
-            setSkillsData(data);
-        }
         getSkills();
     }, [])
-
-    const skillNames = useState([skillsData.map((e) => e.title)]);
-
-    const changeNewSkill = () => {
-        setNewSkill({
-            name: skill,
-            id: skillNames.indexOf(skill)+1,
-            experience: exp
-        });
-    }
+    
+    function getByValue(map, searchValue) {
+        for (let [key, value] of map.entries()) {
+          if (value === searchValue)
+            return key;
+        }
+      }
 
     const changeSkill = (e) => {
         setSkill(e);
+        toggleDrop();
     }
 
     const toggleDrop = () => {
@@ -49,19 +48,31 @@ const Skills = ({allSkills, addSkill, showSkills, toggleCoordinates, toggleSkill
         toggleSkills();
     }
 
-    const changeExp = (e) => {
-        setExp(e);
-        changeNewSkill();
+    const onNext = () => {
+        toggleCovid();
+        toggleSkills();
+    }
+
+    const changeExp = (a) => {
+        setExp(a);
     }
 
     const onAdd = (e) => {
         e.preventDefault();
         const n = {
-            id: skillNames.indexOf(skill)+1,
-            experence: exp
+            id: getByValue(skillMap, skill),
+            experience: exp
         }
-        console.log(skillNames + "names");
-        addSkill(n);
+        var isAlready = false;
+        for(var i=0; i<allSkills.length; i++) {
+            if(allSkills[i].id === n.id) {
+                isAlready = true;
+                break;
+            }
+        }
+        if(!isAlready) {
+            addSkill(n);
+        }
         console.log(n);
     }
  
@@ -69,7 +80,7 @@ const Skills = ({allSkills, addSkill, showSkills, toggleCoordinates, toggleSkill
             {showSkills && (
             <div className="coordinates d-flex">
                     <div className="left d-flex">
-                        <h1>Tell us about your skills</h1>
+                        <h1 id="skillsH">Tell us about your skills</h1>
                         <form>
                             <div onClick={toggleDrop} style={{cursor: 'pointer'}} className='skills form-input'>
                                 {skill}
@@ -78,21 +89,22 @@ const Skills = ({allSkills, addSkill, showSkills, toggleCoordinates, toggleSkill
                             {showDrop && <div className='drop-skills'>
                                 {
                                     skillsData.map((s) => 
-                                        <div key={s.id} onClick={()=>changeSkill(s.title)} className='skill'>{s.title}</div>
+                                        <div key={Math.random()*999} onClick={()=>changeSkill(s.title)} className='skill'>{s.title}</div>
                                     )
                                 }
                             </div>}
-                            <input onChange={(e) => changeExp(e.target.value)} className='form-input' name="durations" type="text" placeholder='Experience duration in years'/>
+                            <input onChange={(e) => changeExp(e.target.value)} id="exper" className='form-input' name="durations" type="text" placeholder='Experience duration in years'/>
                             <div onClick={onAdd} className="btn">Add programming language</div>
                         
                             
                             <div className='allSkills'>
                                 {
                                     allSkills.map((s) => 
-                                        <div key={s.id} className='skillbar'>
-                                            <div style={{marginLeft: '-30px'}}>{s.title}</div>
-                                            <div style={{marginLeft: '-80px'}}>Years of Experience:{s.experience}</div>
-                                            <img style={{ cursor: 'pointer', marginRight: '-30px'}} src={remove} alt="" />
+                                        <div key={Math.random()*999} className='skillbar'>
+                                            {console.log(allSkills)}
+                                            <div style={{marginLeft: '-30px'}}>{skillMap.get(s.id)}</div>
+                                            <div style={{marginLeft: '-80px'}}>{console.log(s)}Years of Experience: {s.experience}</div>
+                                            <img onClick={() => onDelete(s)} style={{ cursor: 'pointer', marginRight: '-30px'}} src={remove} alt="" />
                                         </div>
                                     )
                                 }
@@ -105,7 +117,7 @@ const Skills = ({allSkills, addSkill, showSkills, toggleCoordinates, toggleSkill
                             <img src={ellipse2} alt="" />
                             <img src={ellipse2} alt="" />
                             <img src={ellipse2} alt="" />
-                            <img src={next} alt="" />
+                            <img onClick={onNext} src={next} alt="next" />
                         </div>
                     </div>
                     <div className="right">

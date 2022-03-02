@@ -31,10 +31,14 @@ function App() {
     setFinalSkills([...finalSkills, skill]);
   }
 
+  const deleteSkill = (skill) => {
+    setFinalSkills(finalSkills.filter((e) => skill.id !== e.id));
+  }
+
   return (
     <div>
       <Intro toggleStarted={toggleStarted} isStarted={started} />
-      {started && <Questions allSkills={finalSkills} addSkill={addSkill} toggleCoordinates={toggleCoordinates} isCoordinates={coordinates}/>}
+      {started && <Questions toggleStarted={toggleStarted} deleteSkill={deleteSkill} allSkills={finalSkills} addSkill={addSkill} toggleCoordinates={toggleCoordinates} isCoordinates={coordinates}/>}
     </div>
   );
 }

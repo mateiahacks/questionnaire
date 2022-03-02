@@ -21,7 +21,7 @@ p {
 }
 
 .right > p {
-  width: 600px;
+  width: 650px;
 }
 
 .info {
@@ -169,11 +169,15 @@ div.form-input {
   margin-bottom: 50px;
 }
 
+#skillsH {
+  margin-bottom: 40px;
+}
+
 .drop-skills {
   position: absolute;
   background-color: white;
   width: 400px;
-  z-index: 1;
+  z-index: 2;
 }
 
 .drop-skills > div{
@@ -184,7 +188,7 @@ div.form-input {
 }
 
 .allSkills {
-  margin-top: 120px;
+  margin-top: 150px;
 }
 
 .skillbar {
@@ -203,6 +207,45 @@ div.form-input {
 .skillbar > div {
   font-family: 'Montserrat';
   font-weight: 900;
+}
+
+.covid-q{
+  display: flex;
+  flex-direction: column;
+  font-family: 'Montserrat';
+  font-weight: 700;
+  font-size: 14px;
+  text-align: start;
+  margin-bottom: 50px;
+}
+
+pre {
+  font-family: 'Montserrat';
+  font-weight: 700;
+
+}
+
+.covidForm {
+  margin-left: -300px;
+}
+.covid-q > * {
+  margin-bottom: 20px;
+}
+
+.checkbox {
+  width: 10px;
+  height: 10px;
+  border: 1px solid #525557;
+  border-radius: 50%;
+}
+
+.quest {
+  font-size: 16px;
+}
+
+.choice {
+  align-items: center;
+  margin-bottom: 0px;
 }
 
 @media only screen and (max-width: 1200px) {
