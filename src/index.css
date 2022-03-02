@@ -11,6 +11,22 @@ html, body {
 :root {
   --redberryColor: #FE3B1F;
 }
+.flex-centered {align-items: center; justify-content: center;}
+.d-flex {display: flex;}
+p {
+  font-family: 'Montserrat';
+  color: #FFFFFF;
+  line-height: 50px;
+  font-size: 22px;
+}
+
+.right > p {
+  width: 600px;
+}
+
+.info {
+  padding: 500px;
+}
 
 .fill-screen {
   position: absolute;
@@ -28,6 +44,7 @@ html, body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  text-align: center;
 }
 
 .intro > h1 {
@@ -47,7 +64,7 @@ html, body {
   line-height: 30px;
   font-size: 20px;
 }
-
+.left > form {position: relative;}
 .btn {
   color: white;
   font-size: 22px;
@@ -57,6 +74,138 @@ html, body {
   cursor: pointer;
 }
 
+.margin-top {
+  margin-top: 150px;
+}
+
+form > .btn {
+  position: absolute;
+  right: 0;
+  border-radius: 0;
+  font-size: 14px;
+  font-family: 'Montserrat';
+  padding: 15px;
+  width: 200px;
+  align-self: flex-end;
+}
+
 .btn-start {
   margin-bottom: 30px;
+}
+
+.coordinates {
+  height: 100vh;
+  width: 100%;
+}
+
+.left {
+  position: relative;
+  width: 100%;
+  left: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center; 
+  padding: 0 120px 0 120px;
+}
+
+.left > h1 {
+  margin-top: 100px;
+}
+
+.right {
+  width: 100%;
+  right: 0;
+  padding: 80px 100px 100px 150px;
+  background-color: #0C0D0E;
+}
+.left > h1, .right > h1 {
+  font-family: 'PT sans', sans-serif;
+  font-family: 'Rowdies', cursive;
+  color: var(--redberryColor);
+  font-weight: 400;
+  font-size: 52px;
+  margin-bottom: 120px;
+}
+.right > h1 {margin-bottom: 100px;}
+.left > form {
+  margin-bottom: 80px;
+}
+
+.form-input:focus {
+  outline: none;
+  border: 1px solid lightblue;
+}
+
+.form-input {
+  border: 1px solid #525557;
+  border-radius: 0;
+  padding: 20px 50px 20px 50px;
+  font-size: 16px;
+  font-style: italic;
+  width: 400px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.left > form > .form-input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.switcher > img {
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+div.form-input {
+  font-family: 'Montserrat';
+  font-weight: 700;
+}
+
+.switcher {
+  margin-bottom: 50px;
+}
+
+.drop-skills {
+  position: absolute;
+  background-color: white;
+  width: 400px;
+  z-index: 1;
+}
+
+.drop-skills > div{
+  margin-bottom: 5px;
+  background-color: #9fa3a5;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.allSkills {
+  margin-top: 120px;
+}
+
+.skillbar {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #525557;
+  border-radius: 0;
+  padding: 20px 50px 20px 50px;
+  font-size: 16px;
+  font-style: italic;
+  width: 400px;
+  margin-bottom: 20px;
+  text-align: left; 
+}
+
+.skillbar > div {
+  font-family: 'Montserrat';
+  font-weight: 900;
+}
+
+@media only screen and (max-width: 1200px) {
+
+
 }
