@@ -46,7 +46,7 @@ p {
   flex-direction: column;
   text-align: center;
 }
-
+.covid {height: 1200px;}
 .intro > h1 {
   font-family: 'PT sans', sans-serif;
   font-family: 'Rowdies', cursive;
@@ -89,6 +89,10 @@ form > .btn {
   align-self: flex-end;
 }
 
+::-webkit-calendar-picker-indicator { 
+  background: url("images/calendar.png") no-repeat center; 
+}
+
 .btn-start {
   margin-bottom: 30px;
 }
@@ -107,6 +111,12 @@ form > .btn {
   justify-content: space-between;
   text-align: center; 
   padding: 0 120px 0 120px;
+}
+
+.date {
+  font-family: 'Montserrat';
+  font-style: italic;
+  font-weight: 900;
 }
 
 .left > h1 {
@@ -189,6 +199,7 @@ div.form-input {
 
 .allSkills {
   margin-top: 150px;
+  margin-bottom: -50px;
 }
 
 .skillbar {
@@ -225,9 +236,7 @@ pre {
 
 }
 
-.covidForm {
-  margin-left: -300px;
-}
+.checked {background-color: rgb(137, 137, 211);}
 .covid-q > * {
   margin-bottom: 20px;
 }
@@ -237,6 +246,7 @@ pre {
   height: 10px;
   border: 1px solid #525557;
   border-radius: 50%;
+  cursor: pointer;
 }
 
 .quest {

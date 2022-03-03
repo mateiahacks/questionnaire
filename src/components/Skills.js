@@ -70,7 +70,7 @@ const Skills = ({onDelete, allSkills, addSkill, showSkills, toggleCoordinates, t
                 break;
             }
         }
-        if(!isAlready) {
+        if(!isAlready && exp !== 0 && skill !== "Skills") {
             addSkill(n);
         }
         console.log(n);
