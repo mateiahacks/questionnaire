@@ -158,6 +158,21 @@ form > .btn {
   text-align: left;
 }
 
+.errored {
+  border: 1px solid red;
+}
+
+.error {
+  color: red;
+  font-family: 'Montserrat';
+  font-weight: bold;
+  font-size: 14px;
+  font-style: italic;
+  margin-top: -15px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
 .left > form > .form-input {
   display: flex;
   align-items: center;

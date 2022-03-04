@@ -5,16 +5,61 @@ import next from '../images/Next.png'
 import ellipse1 from '../images/Ellipse1.png';
 import ellipse2 from '../images/Ellipse2.png';
 
-const Coordinates = ({toggleStarted, toggleSkills, isCoordinates, toggleCoordinates}) => {
+const Coordinates = ({ changeFirstName, changeLastName, changeEmail, changeNumber, toggleStarted, toggleSkills, isCoordinates, toggleCoordinates}) => {
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [number, setNumber] = useState("");
 
+    const [errors, setErrors] = useState([false, false, false, false]); 
+
+    function is_numeric(str){
+        return /^\d+$/.test(str);
+    }
+
+    const onFirstNameChange = (a) => {
+        if(a.length == 0) {
+            setErrors([true, errors[1], errors[2], errors[3]]);
+        } else {
+            setErrors([false, errors[1], errors[2], errors[3]]);
+        }
+        setFirstName(a);
+    }
+
+    const onLastNameChange = (a) => {
+        if(a.length < 3) {
+            setErrors([errors[0], true, errors[2], errors[3]]);
+        } else {
+            setErrors([errors[0], false, errors[2], errors[3]]);
+        }
+        setLastName(a);
+    }
+
+    const onEmailChange = (a) => {
+        const regex  = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        if(!regex.test(a)) {
+            setErrors([errors[0], errors[1], true, errors[3]]);
+        } else {
+            setErrors([errors[0], errors[1], false, errors[3]]);
+        }
+        setEmail(a);
+    }
+
+    const onNumberChange = (a) => {
+        if(!(is_numeric(a) && a.length == 9)) {
+            setErrors([errors[0], errors[1], errors[2], true]);
+        } else {
+            setErrors([errors[0], errors[1], errors[2], false]);
+        }
+        setNumber(a);
+    }
+
     const onNext = () => {
-        toggleCoordinates();
-        toggleSkills();
+        if(!errors.includes(true) && !document.getElementById("firstName").value.length == 0) {
+            toggleCoordinates();
+            toggleSkills();
+        }
     }
 
     const onPrev = () => {
@@ -22,15 +67,21 @@ const Coordinates = ({toggleStarted, toggleSkills, isCoordinates, toggleCoordina
         toggleStarted();
     }
 
+
+
     return <div>{isCoordinates && (
             <div className="coordinates d-flex">
                 <div className="left d-flex">
                     <h1>Hey, Rocketeer, what are your coordinates?</h1>
                     <form>
-                        <input name="firstname" className='form-input' type="text" placeholder='First Name'/>
-                        <input className='form-input' type="text" placeholder='Last Name'/>
-                        <input className='form-input' type="text" placeholder='E Mail'/>
-                        <input className='form-input' type="text" placeholder=''/>
+                        <input value={firstName} id="firstName" onChange={(e) => onFirstNameChange(e.target.value)} name="firstname" className={errors[0] ? 'form-input errored':'form-input'} type="text" placeholder='First Name'/>
+                        {errors[0] && <div className="error">*first name required</div>}
+                        <input value={lastName} onChange={(e) => onLastNameChange(e.target.value)} className={errors[1] ? 'form-input errored':'form-input'} type="text" placeholder='Last Name'/>
+                        {errors[1] && <div className="error">*last name should include 3 or more characters</div>}
+                        <input value={email} onChange={(e) => onEmailChange(e.target.value)} className={errors[2] ? 'form-input errored':'form-input'} type="text" placeholder='E Mail'/>
+                        {errors[2] && <div className="error">*invalid email format</div>}
+                        <input value={number} onChange={(e) => onNumberChange(e.target.value)} className={errors[3] ? 'form-input errored':'form-input'} type="text" placeholder='+995 --- ------ '/>
+                        {errors[3] && <div className="error">*number should contain exactly 9 digit</div>}
                     </form>
                     <div className="switcher">
                         <img onClick={onPrev} src={previous} />
