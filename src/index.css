@@ -273,6 +273,19 @@ pre {
   margin-bottom: 0px;
 }
 
+.about-right {
+  height: 950px;
+}
+
+.about-input {
+  height: 100px;
+  text-align: initial;
+  resize: none;
+  font-family: 'Montserrat';
+  font-weight: 900;
+}
+
+
 @media only screen and (max-width: 1200px) {
 
 

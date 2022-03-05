@@ -55,8 +55,22 @@ const Coordinates = ({ changeFirstName, changeLastName, changeEmail, changeNumbe
         setNumber(a);
     }
 
+    const collectInfo = () => {
+        changeFirstName(firstName);
+        changeLastName(lastName);
+        changeEmail(email);
+        changeNumber(number);
+    }
+
     const onNext = () => {
         if(!errors.includes(true) && !document.getElementById("firstName").value.length == 0) {
+            collectInfo();
+            console.log({
+                firstname: firstName,
+                lastname: lastName,
+                email: email,
+                number: number
+            })
             toggleCoordinates();
             toggleSkills();
         }
@@ -81,7 +95,7 @@ const Coordinates = ({ changeFirstName, changeLastName, changeEmail, changeNumbe
                         <input value={email} onChange={(e) => onEmailChange(e.target.value)} className={errors[2] ? 'form-input errored':'form-input'} type="text" placeholder='E Mail'/>
                         {errors[2] && <div className="error">*invalid email format</div>}
                         <input value={number} onChange={(e) => onNumberChange(e.target.value)} className={errors[3] ? 'form-input errored':'form-input'} type="text" placeholder='+995 --- ------ '/>
-                        {errors[3] && <div className="error">*number should contain exactly 9 digit</div>}
+                        {errors[3] && <div className="error">*number should contain exactly 9 digits</div>}
                     </form>
                     <div className="switcher">
                         <img onClick={onPrev} src={previous} />

@@ -4,20 +4,36 @@ import ellipse1 from '../images/Ellipse1.png';
 import ellipse2 from '../images/Ellipse2.png';
 import { useState } from 'react';
 
-const Covid = ({showCovid, toggleCovid, toggleSkills}) => {
+const Covid = ({debug,showCovid, toggleCovid, toggleSkills, toggleShowAbout,
+                changeWorkPref, toggleCovidContact,
+                changeContactDate, toggleVaccinated, changeLastVaccineDate
+            }) => {
     const [workChoicesColor, setWorkChoicesColor] = useState(['blue', 'white', 'white']);
-    const [covidChoicesColor, setCovidChoicesColor] = useState(['white', 'blue']);    
-    const [vacChoicesColor, setVacChoicesColor] = useState(['white', 'white']);
+    const [covidChoicesColor, setCovidChoicesColor] = useState(['blue', 'white']);    
+    const [vacChoicesColor, setVacChoicesColor] = useState(['blue', 'white']);
 
     const [contactDate, setContactDate] = useState('');
+    const [vacDate, setVacDate] = useState('');
 
-    const changeContactDate = (e) => {
+    const onChangeContactDate = (e) => {
         setContactDate(e);
+    }
+
+    const onChangeVacDate = (e) => {
+        setVacDate(e);
     }
 
     const onPrev = () => {
         toggleCovid();
         toggleSkills();
+    }
+
+    const onNext = () => {
+        if(!((vacDate=="" && vacChoicesColor[0]==="blue") || (contactDate=="" && covidChoicesColor[0]==="blue"))) {
+            toggleShowAbout();
+            toggleCovid();
+            debug();
+        }
     }
 
     const toggleVacColor = (index) => {
@@ -60,20 +76,20 @@ const Covid = ({showCovid, toggleCovid, toggleSkills}) => {
                         <div className='quest'>how would you prefer to work?</div>
                         <div className="choice d-flex">
                             <div 
-                             onClick={() => toggleWorkColor(0)}   
+                             onClick={() => {toggleWorkColor(0); changeWorkPref("from-office")}}   
                              style={{backgroundColor: workChoicesColor[0]}} className="checkbox"></div>
                             <pre>  From Sairme office</pre>
                         </div>
                         <div className="choice d-flex">
                             <div 
-                            onClick={() => toggleWorkColor(1)}
+                            onClick={() => {toggleWorkColor(1); changeWorkPref("from-home")}}
                             style={{backgroundColor: workChoicesColor[1]}}
                             className="checkbox"></div>
                             <pre>  From Home</pre>
                         </div>
                         <div className="choice d-flex">
                             <div
-                            onClick={() => toggleWorkColor(2)}
+                            onClick={() => {toggleWorkColor(2); changeWorkPref("hybrid")}}
                             style={{backgroundColor: workChoicesColor[2]}} 
                             className="checkbox"></div>
                             <pre>  Hybrid</pre>
@@ -83,14 +99,14 @@ const Covid = ({showCovid, toggleCovid, toggleSkills}) => {
                         <div className="quest">did you contact covid-19 :(?</div>
                         <div className="choice d-flex">
                             <div 
-                            onClick={() => toggleCovidColor(0)}
+                            onClick={() => {toggleCovidColor(0); toggleCovidContact(true)}}
                             style={{backgroundColor: covidChoicesColor[0]}}
                             className="checkbox"></div>
                             <pre>  Yes</pre>
                         </div>
                         <div className="choice d-flex">
                             <div 
-                            onClick={() => toggleCovidColor(1)}
+                            onClick={() => {toggleCovidColor(1); toggleCovidContact(false)}}
                             style={{backgroundColor: covidChoicesColor[1]}}
                             className="checkbox"></div>
                             <pre>  No</pre>
@@ -98,20 +114,24 @@ const Covid = ({showCovid, toggleCovid, toggleSkills}) => {
                     </div>
                     <div className="covid-q">
                         <div className="quest"> When ?</div>
-                        <input onChange={(e) => changeContactDate(e.target.value)} placeholder="dd-mm-yyyy" className='form-input date' type="date" placeholder="Date"/>
+                        <input onChange={(e) => {
+                            onChangeContactDate(e.target.value);
+                            changeContactDate(e.target.value);
+                            }} placeholder="dd-mm-yyyy" className='form-input date' value={contactDate} type="date"/>
+                        {(contactDate=="" && covidChoicesColor[0]==="blue") && <div className="error">*choose date</div>}
                     </div>
                     <div className="covid-q">
                         <div className="quest">Have you been vaccinated?</div>
                         <div className="choice d-flex">
                             <div 
-                            onClick={() => toggleVacColor(0)}
+                            onClick={() => {toggleVacColor(0); toggleVaccinated(true);}}
                             style={{backgroundColor: vacChoicesColor[0]}}
                             className="checkbox"></div>
                             <pre>  Yes</pre>
                         </div>
                         <div className="choice d-flex">
                             <div 
-                            onClick={() => toggleVacColor(1)}
+                            onClick={() => {toggleVacColor(1); toggleVaccinated(false)}}
                             style={{backgroundColor: vacChoicesColor[1]}}
                             className="checkbox"></div>
                             <pre>  No</pre>
@@ -119,7 +139,11 @@ const Covid = ({showCovid, toggleCovid, toggleSkills}) => {
                     </div>
                     <div className="covid-q">
                         <div className="quest">When did you get last covid vaccine?</div>
-                        <input placeholder="dd-mm-yyyy" className='form-input date' type="date" placeholder="Date"/>
+                        <input onChange={(e) => {
+                            onChangeVacDate(e.target.value);
+                            changeLastVaccineDate(e.target.value);
+                            }} placeholder="dd-mm-yyyy" value={vacDate} className='form-input date' type="date"/>
+                        {(vacDate=="" && vacChoicesColor[0]==="blue") && <div className="error">*choose date</div>}
                     </div>
                 </form>
                 <div className="switcher">
@@ -129,7 +153,7 @@ const Covid = ({showCovid, toggleCovid, toggleSkills}) => {
                     <img src={ellipse1} alt="" />
                     <img src={ellipse2} alt="" />
                     <img src={ellipse2} alt="" />
-                    <img src={next} alt="" />
+                    <img onClick={onNext} src={next} alt="" />
                 </div>
             </div>
             <div className="right covid">

@@ -26,6 +26,10 @@ const Skills = ({onDelete, allSkills, addSkill, showSkills, toggleCoordinates, t
     useEffect(() => {
         getSkills();
     }, [])
+
+    function is_numeric(str){
+        return /^\d+$/.test(str);
+    }
     
     function getByValue(map, searchValue) {
         for (let [key, value] of map.entries()) {
@@ -49,8 +53,10 @@ const Skills = ({onDelete, allSkills, addSkill, showSkills, toggleCoordinates, t
     }
 
     const onNext = () => {
-        toggleCovid();
-        toggleSkills();
+        if(allSkills.length > 0) {
+            toggleCovid();
+            toggleSkills();
+        }
     }
 
     const changeExp = (a) => {
@@ -58,22 +64,28 @@ const Skills = ({onDelete, allSkills, addSkill, showSkills, toggleCoordinates, t
     }
 
     const onAdd = (e) => {
-        e.preventDefault();
-        const n = {
-            id: getByValue(skillMap, skill),
-            experience: exp
-        }
-        var isAlready = false;
-        for(var i=0; i<allSkills.length; i++) {
-            if(allSkills[i].id === n.id) {
-                isAlready = true;
-                break;
+        if(skill !== "Skills" && is_numeric(exp)) {
+            e.preventDefault();
+            const n = {
+                id: getByValue(skillMap, skill),
+                experience: exp
             }
+            var isAlready = false;
+            for(var i=0; i<allSkills.length; i++) {
+                if(allSkills[i].id === n.id) {
+                    isAlready = true;
+                    break;
+                }
+            }
+            if(isAlready) {
+                document.getElementById("is").style.display = "block";
+            }
+            if(!isAlready && exp !== 0 && skill !== "Skills") {
+                document.getElementById("is").style.display = "none";
+                addSkill(n);
+            }
+            console.log(n);
         }
-        if(!isAlready && exp !== 0 && skill !== "Skills") {
-            addSkill(n);
-        }
-        console.log(n);
     }
  
     return <div>
@@ -86,6 +98,7 @@ const Skills = ({onDelete, allSkills, addSkill, showSkills, toggleCoordinates, t
                                 {skill}
                                 <img src={vector} alt="" />
                             </div>
+                            <div id="is" style={{display: 'none'}} className='error'>*already added this language</div>
                             {showDrop && <div className='drop-skills'>
                                 {
                                     skillsData.map((s) => 
@@ -93,7 +106,8 @@ const Skills = ({onDelete, allSkills, addSkill, showSkills, toggleCoordinates, t
                                     )
                                 }
                             </div>}
-                            <input onChange={(e) => changeExp(e.target.value)} id="exper" className='form-input' name="durations" type="text" placeholder='Experience duration in years'/>
+                            <input onChange={(e) => changeExp(e.target.value)} id="exper" className={is_numeric(exp) ? 'form-input':'form-input errored'} name="durations" type="text" placeholder='Experience duration in years'/>
+                            {!is_numeric(exp) && <div className="error">*input should be number</div>}
                             <div onClick={onAdd} className="btn">Add programming language</div>
                         
                             

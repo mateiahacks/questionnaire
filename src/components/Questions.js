@@ -6,11 +6,24 @@ import ellipse2 from '../images/Ellipse2.png';
 import Skills from "./Skills";
 import Covid from "./Covid";
 import { useState } from 'react';
+import About from "./About";
 
-const Questions = ({ changeFirstName, changeLastName, changeEmail, changeNumber, toggleStarted, deleteSkill, allSkills, addSkill, isCoordinates, toggleCoordinates}) => {
+const Questions = ({ debug,
+    changeFirstName, changeLastName, 
+    changeEmail, changeNumber, toggleStarted, 
+    deleteSkill, allSkills, addSkill, 
+    isCoordinates, toggleCoordinates,
+    changeWorkPref, toggleCovidContact,
+    changeContactDate, toggleVaccinated, changeLastVaccineDate,
+    toggleDevtalk, changeAboutDevtalk, changeSpecial}) => {
 
     const [showSkills, setShowSkills] = useState(false);
     const [showCovid, setShowCovid] = useState(false);
+    const [showAbout, setShowAbout] = useState(false);
+
+    const toggleShowAbout = () => {
+        setShowAbout(!showAbout);
+    }
 
     const toggleSkills = () => {
         setShowSkills(!showSkills);
@@ -20,16 +33,34 @@ const Questions = ({ changeFirstName, changeLastName, changeEmail, changeNumber,
         setShowCovid(!showCovid);
     }
 
+
     return (
         <div className="questions">
             <Coordinates 
             changeFirstName={changeFirstName}
-            changeLastName={changeFirstName}
+            changeLastName={changeLastName}
             changeEmail={changeEmail}
             changeNumber={changeNumber}
             toggleSkills={toggleSkills} toggleStarted={toggleStarted} isCoordinates={isCoordinates} toggleCoordinates={toggleCoordinates}/>
             <Skills toggleCovid={toggleCovid} onDelete={deleteSkill} allSkills={allSkills} addSkill={addSkill} toggleCoordinates={toggleCoordinates} toggleSkills={toggleSkills} showSkills={showSkills}/>
-            <Covid toggleSkills={toggleSkills} showCovid={showCovid} toggleCovid={toggleCovid} />
+            <Covid 
+            debug={debug}
+            toggleShowAbout={toggleShowAbout} toggleSkills={toggleSkills} 
+            showCovid={showCovid} toggleCovid={toggleCovid} 
+            changeWorkPref={changeWorkPref}
+            toggleCovidContact={toggleCovidContact}
+            changeContactDate={changeContactDate}
+            toggleVaccinated={toggleVaccinated}
+            changeLastVaccineDate={changeLastVaccineDate}
+        />
+            <About 
+            toggleCovid={toggleCovid} toggleShowAbout={toggleShowAbout} 
+            toggleDevtalk={toggleDevtalk}
+            changeAboutDevtalk={changeAboutDevtalk}
+            changeSpecial={changeSpecial}
+            showAbout={showAbout}
+            />
+
         </div>
     )
 }
