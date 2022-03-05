@@ -67,8 +67,8 @@ const Skills = ({onDelete, allSkills, addSkill, showSkills, toggleCoordinates, t
         if(skill !== "Skills" && is_numeric(exp)) {
             e.preventDefault();
             const n = {
-                id: getByValue(skillMap, skill),
-                experience: exp
+                id: parseInt(getByValue(skillMap, skill)),
+                experience: parseInt(exp)
             }
             var isAlready = false;
             for(var i=0; i<allSkills.length; i++) {

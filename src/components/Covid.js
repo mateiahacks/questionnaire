@@ -32,7 +32,6 @@ const Covid = ({debug,showCovid, toggleCovid, toggleSkills, toggleShowAbout,
         if(!((vacDate=="" && vacChoicesColor[0]==="blue") || (contactDate=="" && covidChoicesColor[0]==="blue"))) {
             toggleShowAbout();
             toggleCovid();
-            debug();
         }
     }
 

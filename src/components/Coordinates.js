@@ -46,8 +46,12 @@ const Coordinates = ({ changeFirstName, changeLastName, changeEmail, changeNumbe
         setEmail(a);
     }
 
+    const startsWith995 = (a) => {
+        return a.substring(0, 4) === "+995";
+    }
+
     const onNumberChange = (a) => {
-        if(!(is_numeric(a) && a.length == 9)) {
+        if(!(is_numeric(a.substring(1)) && a.length == 13 && startsWith995(a))) {
             setErrors([errors[0], errors[1], errors[2], true]);
         } else {
             setErrors([errors[0], errors[1], errors[2], false]);
@@ -65,12 +69,6 @@ const Coordinates = ({ changeFirstName, changeLastName, changeEmail, changeNumbe
     const onNext = () => {
         if(!errors.includes(true) && !document.getElementById("firstName").value.length == 0) {
             collectInfo();
-            console.log({
-                firstname: firstName,
-                lastname: lastName,
-                email: email,
-                number: number
-            })
             toggleCoordinates();
             toggleSkills();
         }
@@ -80,7 +78,6 @@ const Coordinates = ({ changeFirstName, changeLastName, changeEmail, changeNumbe
         toggleCoordinates();
         toggleStarted();
     }
-
 
 
     return <div>{isCoordinates && (
@@ -95,7 +92,7 @@ const Coordinates = ({ changeFirstName, changeLastName, changeEmail, changeNumbe
                         <input value={email} onChange={(e) => onEmailChange(e.target.value)} className={errors[2] ? 'form-input errored':'form-input'} type="text" placeholder='E Mail'/>
                         {errors[2] && <div className="error">*invalid email format</div>}
                         <input value={number} onChange={(e) => onNumberChange(e.target.value)} className={errors[3] ? 'form-input errored':'form-input'} type="text" placeholder='+995 --- ------ '/>
-                        {errors[3] && <div className="error">*number should contain exactly 9 digits</div>}
+                        {errors[3] && <div className="error">*incorrect format</div>}
                     </form>
                     <div className="switcher">
                         <img onClick={onPrev} src={previous} />

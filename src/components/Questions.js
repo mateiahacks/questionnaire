@@ -7,8 +7,9 @@ import Skills from "./Skills";
 import Covid from "./Covid";
 import { useState } from 'react';
 import About from "./About";
+import Submit from "./Submit";
 
-const Questions = ({ debug,
+const Questions = ({ postData, debug, submitting,toggleSubmitting,
     changeFirstName, changeLastName, 
     changeEmail, changeNumber, toggleStarted, 
     deleteSkill, allSkills, addSkill, 
@@ -59,7 +60,10 @@ const Questions = ({ debug,
             changeAboutDevtalk={changeAboutDevtalk}
             changeSpecial={changeSpecial}
             showAbout={showAbout}
+            toggleSubmitting={toggleSubmitting}
             />
+
+            {submitting && <Submit postData={postData} toggleShowAbout={toggleShowAbout} toggleSubmitting={toggleSubmitting}/>}
 
         </div>
     )

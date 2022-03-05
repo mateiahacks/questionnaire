@@ -4,7 +4,7 @@ import ellipse1 from '../images/Ellipse1.png';
 import ellipse2 from '../images/Ellipse2.png';
 import { useState } from 'react';
 
-const About = ({toggleDevtalk, changeAboutDevtalk, changeSpecial, showAbout, toggleCovid, toggleShowAbout}) => {
+const About = ({ toggleSubmitting, toggleDevtalk, changeAboutDevtalk, changeSpecial, showAbout, toggleCovid, toggleShowAbout}) => {
 
     const [devtalkColor, setDevtalkColor] = useState(['blue', 'white']);
     const [about, setAbout] = useState("");
@@ -16,7 +16,10 @@ const About = ({toggleDevtalk, changeAboutDevtalk, changeSpecial, showAbout, tog
     }
 
     const onNext = () => {
-
+        if(about !== "" && special !== "") {
+            toggleSubmitting();
+            toggleShowAbout();
+        }
     }
 
     const toggleColor = (index) => {
@@ -45,11 +48,15 @@ const About = ({toggleDevtalk, changeAboutDevtalk, changeSpecial, showAbout, tog
                     </div>
                     <div className="covid-q">
                         <div className="quest">What would you speak about ad Devtalk?</div>
-                        <textarea onChange={(e)=>{setAbout(e.target.value); changeAboutDevtalk(e.target.value);}} placeholder='I would...' className="form-input about-input"  value={about}/>
+                        <textarea onChange={(e)=>{setAbout(e.target.value); changeAboutDevtalk(e.target.value);}} placeholder='I would...' className={about==="" ?  "form-input about-input errored":"form-input about-input"}  value={about}/>
+                        {about==="" && <div className='error'>*type something</div>}
                     </div>
                     <div className="covid-q">
                         <div className="quest">Tell us something special</div>
-                        <textarea onChange={(e) => {setSpecial(e.target.value); changeSpecial(e.target.value)}} placeholder='I...' className="form-input about-input" value={special} style={{height: '50px'}} />
+                        <textarea onChange={(e) => {setSpecial(e.target.value); changeSpecial(e.target.value)}} placeholder='I...' 
+                        className={special==="" ?  "form-input about-input errored":"form-input about-input"}
+                        value={special} style={{height: '50px'}} />
+                        {special==="" && <div className='error'>*type something</div>}
                     </div>
                 </form>
                 <div className="switcher">
@@ -59,7 +66,7 @@ const About = ({toggleDevtalk, changeAboutDevtalk, changeSpecial, showAbout, tog
                     <img src={ellipse1} alt="" />
                     <img src={ellipse1} alt="" />
                     <img src={ellipse2} alt="" />
-                    <img src={next} alt="" />
+                    <img onClick={onNext} src={next} alt="" />
                 </div>
             </div>
             <div className="right about-right">
