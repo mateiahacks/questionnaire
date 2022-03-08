@@ -2,8 +2,10 @@ import React from 'react';
 import { useState } from 'react';
 import rocketman from '../images/rocketman.png'
 
-const Intro = ({isStarted, toggleStarted}) => {
+const Intro = ({offIntro, toggleShowApps, isStarted, toggleStarted}) => {
     
+    const [showApps, setShowApps] = useState(false);
+
     return <div>
         { !isStarted && (
             
@@ -12,7 +14,10 @@ const Intro = ({isStarted, toggleStarted}) => {
                 <div onClick={toggleStarted} className='btn btn-start'>
                     Start Questionnaire
                 </div>
-                <a href='#'>Submitted Aplications</a>
+                <a onClick={() => {
+                    toggleShowApps();
+                    offIntro();
+                }} href='#'>Submitted Aplications</a>
                 <img src={rocketman} width="410px"/>
             </div>
         )}

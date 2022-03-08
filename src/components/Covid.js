@@ -4,7 +4,7 @@ import ellipse1 from '../images/Ellipse1.png';
 import ellipse2 from '../images/Ellipse2.png';
 import { useState } from 'react';
 
-const Covid = ({debug,showCovid, toggleCovid, toggleSkills, toggleShowAbout,
+const Covid = ({toggleCoordinates, debug,showCovid, toggleCovid, toggleSkills, toggleShowAbout,
                 changeWorkPref, toggleCovidContact,
                 changeContactDate, toggleVaccinated, changeLastVaccineDate
             }) => {
@@ -66,9 +66,14 @@ const Covid = ({debug,showCovid, toggleCovid, toggleSkills, toggleShowAbout,
         
     }
 
+    const goIntro = () => {
+        toggleCoordinates();
+        toggleCovid();
+    }
+
     return <div>{showCovid && (
         <div className="coordinates d-flex">
-            <div className="left d-flex">
+            <div className="left covid-left d-flex">
                 <h1>Covid Stuff</h1>
                 <form className='covidForm'>
                     <div className='covid-q'>
@@ -147,8 +152,8 @@ const Covid = ({debug,showCovid, toggleCovid, toggleSkills, toggleShowAbout,
                 </form>
                 <div className="switcher">
                     <img onClick={onPrev} src={previous} />
-                    <img src={ellipse1} alt="" />
-                    <img src={ellipse1} alt="" />
+                    <img onClick={goIntro}  src={ellipse1} alt="" />
+                    <img onClick={onPrev} src={ellipse1} alt="" />
                     <img src={ellipse1} alt="" />
                     <img src={ellipse2} alt="" />
                     <img src={ellipse2} alt="" />

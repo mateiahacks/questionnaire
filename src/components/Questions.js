@@ -8,8 +8,9 @@ import Covid from "./Covid";
 import { useState } from 'react';
 import About from "./About";
 import Submit from "./Submit";
+import Thank from "./Thank";
 
-const Questions = ({ postData, debug, submitting,toggleSubmitting,
+const Questions = ({ onIntro, postData, debug, submitting,toggleSubmitting,
     changeFirstName, changeLastName, 
     changeEmail, changeNumber, toggleStarted, 
     deleteSkill, allSkills, addSkill, 
@@ -21,6 +22,7 @@ const Questions = ({ postData, debug, submitting,toggleSubmitting,
     const [showSkills, setShowSkills] = useState(false);
     const [showCovid, setShowCovid] = useState(false);
     const [showAbout, setShowAbout] = useState(false);
+    const [showThank, setShowThank] = useState(false); 
 
     const toggleShowAbout = () => {
         setShowAbout(!showAbout);
@@ -34,6 +36,10 @@ const Questions = ({ postData, debug, submitting,toggleSubmitting,
         setShowCovid(!showCovid);
     }
 
+    const toggleThank = () => {
+        setShowThank(!showThank);
+    }
+
 
     return (
         <div className="questions">
@@ -45,6 +51,7 @@ const Questions = ({ postData, debug, submitting,toggleSubmitting,
             toggleSkills={toggleSkills} toggleStarted={toggleStarted} isCoordinates={isCoordinates} toggleCoordinates={toggleCoordinates}/>
             <Skills toggleCovid={toggleCovid} onDelete={deleteSkill} allSkills={allSkills} addSkill={addSkill} toggleCoordinates={toggleCoordinates} toggleSkills={toggleSkills} showSkills={showSkills}/>
             <Covid 
+            toggleCoordinates={toggleCoordinates}
             debug={debug}
             toggleShowAbout={toggleShowAbout} toggleSkills={toggleSkills} 
             showCovid={showCovid} toggleCovid={toggleCovid} 
@@ -61,9 +68,12 @@ const Questions = ({ postData, debug, submitting,toggleSubmitting,
             changeSpecial={changeSpecial}
             showAbout={showAbout}
             toggleSubmitting={toggleSubmitting}
+            toggleCoordinates={toggleCoordinates}
+            toggleSkills={toggleSkills}
             />
 
-            {submitting && <Submit postData={postData} toggleShowAbout={toggleShowAbout} toggleSubmitting={toggleSubmitting}/>}
+            {submitting && <Submit toggleThank={toggleThank} postData={postData} toggleShowAbout={toggleShowAbout} toggleSubmitting={toggleSubmitting}/>}
+            {showThank && <Thank onIntro={onIntro} toggleThank={toggleThank} toggleStarted={toggleStarted}/>}
 
         </div>
     )

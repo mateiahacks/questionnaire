@@ -3,6 +3,7 @@ import Intro from './components/Intro';
 import { useState } from 'react';
 import Questions from './components/Questions';
 import Submit from './components/Submit';
+import Applications from './components/Applications';
 
 function App() {
   const [started, setStarted] = useState(false);  
@@ -26,9 +27,10 @@ function App() {
   const [special, setSpecial] = useState("");
 
   const [submitting, setSubmitting] = useState(false);
+  const [showApps, setShowApps] = useState(false);
 
   const postData = async () => {
-    await fetch("https://bootcamp-2022.devtest.ge/api/application", {
+    const res =  await fetch("https://bootcamp-2022.devtest.ge/api/application", {
       method: 'POST',
       headers: {
           'Accept' : 'application/jason',
@@ -43,17 +45,26 @@ function App() {
         phone: number,
         work_preference: workPref,
         had_covid: covidContact,
-        had_covid_at: contactDate,
+        had_covid_at: covidContact ? contactDate:"Did not have covid",
         vaccinated: vaccinated,
-        vaccinated_at: lastVaccineDate,
+        vaccinated_at: vaccinated ? lastVaccineDate:"Not vaccinated",
         will_organize_devtalk: devtalk,
         devtalk_topic: aboutDevtalk,
         something_special: special,
         skills: finalSkills
       }),
     });
+    
+  }
+
+  const offIntro = () => {
+    setStarted(true);
   }
   
+  const toggleShowApps = () => {
+    setShowApps(!showApps);
+  }
+
   const toggleSubmitting = () => {
     setSubmitting(!submitting);
   }
@@ -117,9 +128,13 @@ function App() {
     setNumber(a);
   }
 
+  const onIntro = () => {
+    setStarted(false);
+  }
+
   return (
     <div>
-      <Intro toggleStarted={toggleStarted} isStarted={started} />
+      <Intro offIntro={offIntro} toggleShowApps={toggleShowApps} toggleStarted={toggleStarted} isStarted={started} />
       {started && <Questions
         firstName = {firstName}
         lastName = {lastName}
@@ -144,7 +159,9 @@ function App() {
         toggleSubmitting={toggleSubmitting}
         submitting={submitting}
         postData={postData}
-      />}      
+        onIntro={onIntro}
+      />}
+      {showApps && <Applications />}      
     </div>
   );
 }

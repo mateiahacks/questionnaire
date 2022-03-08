@@ -4,7 +4,7 @@ import ellipse1 from '../images/Ellipse1.png';
 import ellipse2 from '../images/Ellipse2.png';
 import { useState } from 'react';
 
-const About = ({ toggleSubmitting, toggleDevtalk, changeAboutDevtalk, changeSpecial, showAbout, toggleCovid, toggleShowAbout}) => {
+const About = ({ toggleCoordinates, toggleSkills, toggleSubmitting, toggleDevtalk, changeAboutDevtalk, changeSpecial, showAbout, toggleCovid, toggleShowAbout}) => {
 
     const [devtalkColor, setDevtalkColor] = useState(['blue', 'white']);
     const [about, setAbout] = useState("");
@@ -30,9 +30,19 @@ const About = ({ toggleSubmitting, toggleDevtalk, changeAboutDevtalk, changeSpec
         }
     }
 
+    const goCords = () => {
+        toggleShowAbout();
+        toggleCoordinates();
+    }
+
+    const goSkills = () => {
+        toggleShowAbout();
+        toggleSkills();
+    }
+
     return <div>{showAbout && (
         <div className="coordinates d-flex">
-            <div className="left d-flex">
+            <div className="left ab-left d-flex">
                 <h1>What about you?</h1>
                 <form>
                     <div className="covid-q">
@@ -61,9 +71,9 @@ const About = ({ toggleSubmitting, toggleDevtalk, changeAboutDevtalk, changeSpec
                 </form>
                 <div className="switcher">
                     <img onClick={onPrev} src={previous} />
-                    <img src={ellipse1} alt="" />
-                    <img src={ellipse1} alt="" />
-                    <img src={ellipse1} alt="" />
+                    <img onClick={goCords} src={ellipse1} alt="" />
+                    <img onClick={goSkills} src={ellipse1} alt="" />
+                    <img onClick={onPrev} src={ellipse1} alt="" />
                     <img src={ellipse1} alt="" />
                     <img src={ellipse2} alt="" />
                     <img onClick={onNext} src={next} alt="" />

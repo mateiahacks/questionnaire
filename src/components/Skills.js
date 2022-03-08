@@ -91,7 +91,7 @@ const Skills = ({onDelete, allSkills, addSkill, showSkills, toggleCoordinates, t
     return <div>
             {showSkills && (
             <div className="coordinates d-flex">
-                    <div className="left d-flex">
+                    <div className="left skills-left d-flex">
                         <h1 id="skillsH">Tell us about your skills</h1>
                         <form>
                             <div onClick={toggleDrop} style={{cursor: 'pointer'}} className='skills form-input'>
@@ -126,7 +126,7 @@ const Skills = ({onDelete, allSkills, addSkill, showSkills, toggleCoordinates, t
                         </form>
                         <div className="switcher">
                             <img onClick={onPrev} src={previous} />
-                            <img src={ellipse1} alt="" />
+                            <img onClick={onPrev} src={ellipse1} alt="" />
                             <img src={ellipse1} alt="" />
                             <img src={ellipse2} alt="" />
                             <img src={ellipse2} alt="" />

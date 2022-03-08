@@ -6,6 +6,7 @@ html, body {
   padding: 0;
   height: 100%;
   font-weight: 300;
+  background-color: #0C0D0E;
 }
 
 :root {
@@ -98,13 +99,15 @@ form > .btn {
 }
 
 .coordinates {
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
 }
 
 .left {
   position: relative;
   width: 100%;
+  background-color: #FFFFFF;
+  height: auto;
   left: 0;
   flex-direction: column;
   align-items: center;
@@ -112,6 +115,7 @@ form > .btn {
   text-align: center; 
   padding: 0 120px 0 120px;
 }
+
 
 .date {
   font-family: 'Montserrat';
@@ -202,13 +206,19 @@ div.form-input {
   position: absolute;
   background-color: white;
   width: 400px;
+  margin-top: -20px;
   z-index: 2;
+  transition: 3s ease-out;
 }
 
 .drop-skills > div{
-  margin-bottom: 5px;
-  background-color: #9fa3a5;
-  padding: 10px;
+  margin-bottom: 2px;
+  background-color: rgb(226, 219, 219);
+  border-bottom: 1px solid var(--redberryColor);
+  font-family: 'Montserrat';
+  font-weight: 900;
+  padding: 15px;
+  width: 470px;
   cursor: pointer;
 }
 
@@ -245,7 +255,7 @@ div.form-input {
   margin-bottom: 50px;
 }
 
-pre {
+.choice > pre {
   font-family: 'Montserrat';
   font-weight: 700;
 
@@ -310,6 +320,104 @@ pre {
   cursor: pointer;
 }
 
+.apps {
+  background-color: #0C0D0E;
+  color:#FFFFFF;
+  display: flex;
+  align-items: center;
+  max-height: 1500px;
+  flex-direction: column;
+}
+
+.inner > h1 {
+  font-family: 'PT sans', sans-serif;
+  font-family: 'Rowdies', cursive;
+  font-weight: 600;
+  font-size: 42px;
+  margin: 60px 0 50px 15px;
+  text-align: left;
+
+}
+
+.app {
+  background-color: var(--redberryColor);
+  width: 1000px;
+  padding: 12px 25px;
+  font-family: 'Montserrat';
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.sheet {
+  width: 845px;
+  margin-bottom: 10px;
+  background-color: white;
+  color: black;
+  padding: 50px 100px;
+  border: 2px solid var(--redberryColor);
+  font-family: 'Montserrat';
+}
+
+.row-section > h1 {
+  font-style: italic;
+  color: red;
+  text-decoration: underline;
+  font-size: 18px;
+  margin-bottom: 50px;
+}
+
+.app-row {
+  margin-bottom: 50px;
+  justify-content: space-between;
+}
+
+.row-section > pre {
+  margin-bottom: 40px;
+  font-family: 'Montserrat';
+  font-style: italic;
+  font-weight: 900;
+}
+
+.row-section > pre > span {
+  font-weight: 700;
+}
+
+.checkedd {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 1px;
+  padding-top: 1px;
+}
+
+.checkedd::before{
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  -moz-border-radius: 7.5px;
+  -webkit-border-radius: 7.5px;
+  border-radius: 7.5px;
+  border: 1px solid #0C0D0E;
+}
+
+.row-section > .covid-q > .form-input {
+  width: 300px;
+  padding: 15px 30px;
+}
+
+.thank {
+  color: var(--redberryColor);
+  font-family: 'PT sans', sans-serif;
+  font-family: 'Rowdies', cursive;
+  font-size: 40px;
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+}
 
 @media only screen and (max-width: 1200px) {
 
