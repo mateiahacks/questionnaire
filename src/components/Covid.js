@@ -80,13 +80,15 @@ const Covid = ({toggleCoordinates, debug,showCovid, toggleCovid, toggleSkills, t
                         <div className='quest'>how would you prefer to work?</div>
                         <div className="choice d-flex">
                             <div 
-                             onClick={() => {toggleWorkColor(0); changeWorkPref("from-office")}}   
+                             onClick={() => {toggleWorkColor(0); changeWorkPref("from_office");}}   
                               className={workChoicesColor[0]==="blue" ? "checkedd checkbox":"checkbox"}></div>
                             <pre>  From Sairme office</pre>
                         </div>
                         <div className="choice d-flex">
                             <div 
-                            onClick={() => {toggleWorkColor(1); changeWorkPref("from-home")}}
+                            onClick={() => {toggleWorkColor(1); 
+                                            changeWorkPref("from_home");
+                                        }}
                             className={workChoicesColor[1]==="blue" ? "checkedd checkbox":"checkbox"}></div>
                             <pre>  From Home</pre>
                         </div>
