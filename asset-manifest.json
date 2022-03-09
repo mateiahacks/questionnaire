@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/questionnaire/static/css/main.3515834c.css",
+    "main.js": "/questionnaire/static/js/main.39731b44.js",
+    "static/js/787.2bae1cdd.chunk.js": "/questionnaire/static/js/787.2bae1cdd.chunk.js",
+    "static/media/stars.png": "/questionnaire/static/media/stars.79ba770972d1ba63963b.png",
+    "static/media/rocketman.png": "/questionnaire/static/media/rocketman.cd255c41fa9c6b63a423.png",
+    "index.html": "/questionnaire/index.html",
+    "main.3515834c.css.map": "/questionnaire/static/css/main.3515834c.css.map",
+    "main.39731b44.js.map": "/questionnaire/static/js/main.39731b44.js.map",
+    "787.2bae1cdd.chunk.js.map": "/questionnaire/static/js/787.2bae1cdd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3515834c.css",
+    "static/js/main.39731b44.js"
+  ]
+}
