@@ -5,6 +5,8 @@ import Questions from './components/Questions';
 import Submit from './components/Submit';
 import Applications from './components/Applications';
 
+const tok = "22a5aa9f-87b2-4ccb-81f0-f36bf7627547";
+
 function App() {
   const [started, setStarted] = useState(false);  
   const [questions, setQuestions] = useState(false);
@@ -29,7 +31,35 @@ function App() {
   const [submitting, setSubmitting] = useState(false);
   const [showApps, setShowApps] = useState(false);
 
+  let result = {
+    token: tok,
+    first_name: firstName,
+    last_name: lastName,
+    email: email,
+    phone: number,
+    work_preference: workPref,
+    had_covid: covidContact,
+    had_covid_at: contactDate,
+    vaccinated: vaccinated,
+    vaccinated_at: lastVaccineDate,
+    will_organize_devtalk: devtalk,
+    devtalk_topic: aboutDevtalk,
+    something_special: special,
+    skills: finalSkills
+  };
+
+  if(!result.had_covid) {
+    delete result.had_covid_at;
+  }
+  if(!result.vaccinated) {
+    delete result.vaccinated_at;
+  }
+  if(!result.will_organize_devtalk) {
+    delete result.devtalk_topic;
+  }
+
   const postData = async () => {
+
     const res =  await fetch("https://bootcamp-2022.devtest.ge/api/application", {
       method: 'POST',
       headers: {
@@ -37,22 +67,7 @@ function App() {
           'Content-Type' : 'application/json',
           'Sec-Fetch-Site': 'same-origin'
       },
-      body: JSON.stringify({
-        token: "fc966bdd-4da4-4c33-bf6a-4ff25d7e33ce",
-        first_name: firstName,
-        last_name: lastName,
-        email: email,
-        phone: number,
-        work_preference: workPref,
-        had_covid: covidContact,
-        had_covid_at: covidContact ? contactDate:"Did not have covid",
-        vaccinated: vaccinated,
-        vaccinated_at: vaccinated ? lastVaccineDate:"Not vaccinated",
-        will_organize_devtalk: devtalk,
-        devtalk_topic: aboutDevtalk,
-        something_special: special,
-        skills: finalSkills
-      }),
+      body: JSON.stringify(result),
     });
     
   }

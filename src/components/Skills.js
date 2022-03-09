@@ -16,6 +16,8 @@ const Skills = ({onDelete, allSkills, addSkill, showSkills, toggleCoordinates, t
 
     const [renderExp, setRenderExp] = useState(0);
 
+    const [rotated, setaRotated] = useState(false);
+
     const getSkills = async () => {
         const res = await fetch("https://bootcamp-2022.devtest.ge/api/skills");
         const data = await res.json();
@@ -45,6 +47,7 @@ const Skills = ({onDelete, allSkills, addSkill, showSkills, toggleCoordinates, t
 
     const toggleDrop = () => {
         setShowDrop(!showDrop);
+        setaRotated(!rotated);
     }
 
     const onPrev = () => {
@@ -96,7 +99,7 @@ const Skills = ({onDelete, allSkills, addSkill, showSkills, toggleCoordinates, t
                         <form>
                             <div onClick={toggleDrop} style={{cursor: 'pointer'}} className='skills form-input'>
                                 {skill}
-                                <img src={vector} alt="" />
+                                <img src={vector} alt="" style={{transform: rotated && 'rotate(180deg)', transition: '1s'}}/>
                             </div>
                             <div id="is" style={{display: 'none'}} className='error'>*already added this language</div>
                             {showDrop && <div className='drop-skills'>

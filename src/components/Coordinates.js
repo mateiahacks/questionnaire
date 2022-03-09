@@ -67,7 +67,7 @@ const Coordinates = ({ changeFirstName, changeLastName, changeEmail, changeNumbe
     }
 
     const onNext = () => {
-        if(!errors.includes(true) && !document.getElementById("firstName").value.length == 0) {
+        if(!errors.includes(true) && email !== "" && lastName !== "" && number !== "") {
             collectInfo();
             toggleCoordinates();
             toggleSkills();
@@ -86,13 +86,13 @@ const Coordinates = ({ changeFirstName, changeLastName, changeEmail, changeNumbe
                     <h1>Hey, Rocketeer, what are your coordinates?</h1>
                     <form>
                         <input value={firstName} id="firstName" onChange={(e) => onFirstNameChange(e.target.value)} name="firstname" className={errors[0] ? 'form-input errored':'form-input'} type="text" placeholder='First Name'/>
-                        {errors[0] && <div className="error">*first name required</div>}
-                        <input value={lastName} onChange={(e) => onLastNameChange(e.target.value)} className={errors[1] ? 'form-input errored':'form-input'} type="text" placeholder='Last Name'/>
-                        {errors[1] && <div className="error">*last name should include 3 or more characters</div>}
+                        {errors[0] && <div id="error0" className="error">*first name required</div>}
+                        <input id="lastName" value={lastName} onChange={(e) => onLastNameChange(e.target.value)} className={errors[1] ? 'form-input errored':'form-input'} type="text" placeholder='Last Name'/>
+                        {errors[1] && <div id="error1" className="error">*last name should include 3 or more characters</div>}
                         <input value={email} onChange={(e) => onEmailChange(e.target.value)} className={errors[2] ? 'form-input errored':'form-input'} type="text" placeholder='E Mail'/>
-                        {errors[2] && <div className="error">*invalid email format</div>}
+                        {errors[2] && <div id='error2' className="error">*invalid email format</div>}
                         <input value={number} onChange={(e) => onNumberChange(e.target.value)} className={errors[3] ? 'form-input errored':'form-input'} type="text" placeholder='+995 --- ------ '/>
-                        {errors[3] && <div className="error">*incorrect format</div>}
+                        {errors[3] && <div id='error3' className="error">*incorrect format</div>}
                     </form>
                     <div className="switcher">
                         <img onClick={onPrev} src={previous} />

@@ -211,6 +211,10 @@ div.form-input {
   transition: 3s ease-out;
 }
 
+.rotate {
+  transform: rotate(90deg);
+}
+
 .drop-skills > div{
   margin-bottom: 2px;
   background-color: rgb(226, 219, 219);
@@ -417,6 +421,12 @@ div.form-input {
   display: flex; 
   align-items: center;
   justify-content: center;
+}
+
+.date {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 @media only screen and (max-width: 1200px) {

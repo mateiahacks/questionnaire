@@ -1,20 +1,26 @@
 import vector from '../images/Vector1.png';
 import { useState } from 'react';
 import { skillsMap } from './skillsMap';
+import calendar from '../images/calendar.png';
 
 const Application = ({data, self, index}) => {
 
     const [sheet, setSheet] = useState(false);
+    const [rotated, setRotated] = useState(false);
+
 
     const onDrop = () => {
         setSheet(!sheet);
+        setRotated(!rotated);
     }
 
     return (
         <div>
             <div onClick={onDrop} className="app">
                 <div>{index}</div>
-                <img src={vector} style={{height: '8px', cursor: 'pointer'}} alt="" />
+                <div>
+                    <img src={vector} style={{transform: rotated && 'rotate(180deg)', height: '8px', cursor: 'pointer', transition: '1s'}} alt="" />
+                </div>
             </div>
     {sheet && <div className="sheet">
                 <div className="app-row d-flex">
@@ -25,7 +31,7 @@ const Application = ({data, self, index}) => {
                         <pre>E Mail                         <span>{self.email}</span></pre>
                         <pre>Phone                       <span>{self.phone}</span></pre>
                     </div>
-                    <div style={{marginRight: '100px'}} className="row-section">
+                    <div style={{marginRight: '60px'}} className="row-section">
                         <h1>Skillset</h1>
                         {
                             self.skills.map((e) =>
@@ -65,7 +71,7 @@ const Application = ({data, self, index}) => {
                         </div>
                         <div className="covid-q">
                             <div className="quest"> When did you get covid 19?</div>
-                            <div type="date" className='form-input date'>{self.had_covid_at}</div>
+                            <div type="date" className='form-input date'><div>{self.had_covid_at}</div><img src={calendar}/></div>
                         </div>
                         <div className="covid-q">
                             <div className="quest">Have you been vaccinated?</div>
@@ -80,7 +86,7 @@ const Application = ({data, self, index}) => {
                         </div>
                         <div className="covid-q">
                             <div className="quest"> When did you get covid vaccine?</div>
-                            <div type="date" className='form-input date'>{self.vaccinated_at}</div>
+                            <div type="date" className='form-input date'><div>{self.vaccinated_at}</div><img src={calendar}/></div>
                         </div>
                     </div>
                     <div className="row-section">
@@ -102,7 +108,7 @@ const Application = ({data, self, index}) => {
                             <div className="form-input about-input">{self.devtalk_topic}</div>
                         </div>
                         <div className="covid-q">
-                            <div className="quest">What would you speak about at Devtalk</div>
+                            <div className="quest">Tell us something special</div>
                             <div className="form-input about-input">{self.something_special}</div>
                         </div>
                     </div>

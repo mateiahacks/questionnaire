@@ -16,7 +16,7 @@ const About = ({ toggleCoordinates, toggleSkills, toggleSubmitting, toggleDevtal
     }
 
     const onNext = () => {
-        if(about !== "" && special !== "") {
+        if((about !== "" && special !== "") || (devtalkColor[1] ==='blue' && special !== "")) {
             toggleSubmitting();
             toggleShowAbout();
         }
@@ -48,15 +48,19 @@ const About = ({ toggleCoordinates, toggleSkills, toggleSubmitting, toggleDevtal
                     <div className="covid-q">
                         <div className="quest">Would you attend Devtalks and maybe also  organize your own?</div>
                         <div className="choice d-flex">
-                            <div onClick={() => {toggleColor(0); toggleDevtalk(true)}} style={{backgroundColor: devtalkColor[0]}} className="checkbox"></div>
+                            <div onClick={() => {toggleColor(0); toggleDevtalk(true); document.getElementById("aboutDevtalk").style.display = 'block';}} style={{backgroundColor: devtalkColor[0]}} className="checkbox"></div>
                             <pre>  Yes</pre>    
                         </div>
                         <div className="choice d-flex">
-                            <div style={{backgroundColor: devtalkColor[1]}} onClick={() => {toggleColor(1); toggleDevtalk(false)}} className="checkbox"></div>
+                            <div style={{backgroundColor: devtalkColor[1]}} onClick={() => {
+                                toggleColor(1); 
+                                toggleDevtalk(false);
+                                document.getElementById("aboutDevtalk").style.display = 'none';
+                                }} className="checkbox"></div>
                             <pre>  No</pre>    
                         </div>
                     </div>
-                    <div className="covid-q">
+                    <div id='aboutDevtalk' className="covid-q">
                         <div className="quest">What would you speak about ad Devtalk?</div>
                         <textarea onChange={(e)=>{setAbout(e.target.value); changeAboutDevtalk(e.target.value);}} placeholder='I would...' className={about==="" ?  "form-input about-input errored":"form-input about-input"}  value={about}/>
                         {about==="" && <div className='error'>*type something</div>}
