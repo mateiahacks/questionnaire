@@ -393,7 +393,7 @@ div.form-input {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-left: 1px;
+  padding-left: 0.5px;
   padding-top: 1px;
 }
 

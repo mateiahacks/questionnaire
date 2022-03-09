@@ -48,15 +48,16 @@ const About = ({ toggleCoordinates, toggleSkills, toggleSubmitting, toggleDevtal
                     <div className="covid-q">
                         <div className="quest">Would you attend Devtalks and maybe also  organize your own?</div>
                         <div className="choice d-flex">
-                            <div onClick={() => {toggleColor(0); toggleDevtalk(true); document.getElementById("aboutDevtalk").style.display = 'block';}} style={{backgroundColor: devtalkColor[0]}} className="checkbox"></div>
+                            <div onClick={() => {toggleColor(0); toggleDevtalk(true); document.getElementById("aboutDevtalk").style.display = 'block';}} 
+                             className={devtalkColor[0]=="blue" ? "checkedd checkbox":"checkbox"}></div>
                             <pre>  Yes</pre>    
                         </div>
                         <div className="choice d-flex">
-                            <div style={{backgroundColor: devtalkColor[1]}} onClick={() => {
+                            <div onClick={() => {
                                 toggleColor(1); 
                                 toggleDevtalk(false);
                                 document.getElementById("aboutDevtalk").style.display = 'none';
-                                }} className="checkbox"></div>
+                                }} className={devtalkColor[1]=="blue" ? "checkedd checkbox":"checkbox"}></div>
                             <pre>  No</pre>    
                         </div>
                     </div>

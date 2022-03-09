@@ -29,7 +29,7 @@ const Covid = ({toggleCoordinates, debug,showCovid, toggleCovid, toggleSkills, t
     }
 
     const onNext = () => {
-        if(!((vacDate=="" && vacChoicesColor[0]==="blue") || (contactDate=="" && covidChoicesColor[0]==="blue"))) {
+        if(!((vacDate==="" && vacChoicesColor[0]==="blue") || (contactDate==="" && covidChoicesColor[0]==="blue"))) {
             toggleShowAbout();
             toggleCovid();
         }
@@ -81,21 +81,19 @@ const Covid = ({toggleCoordinates, debug,showCovid, toggleCovid, toggleSkills, t
                         <div className="choice d-flex">
                             <div 
                              onClick={() => {toggleWorkColor(0); changeWorkPref("from-office")}}   
-                             style={{backgroundColor: workChoicesColor[0]}} className="checkbox"></div>
+                              className={workChoicesColor[0]==="blue" ? "checkedd checkbox":"checkbox"}></div>
                             <pre>  From Sairme office</pre>
                         </div>
                         <div className="choice d-flex">
                             <div 
                             onClick={() => {toggleWorkColor(1); changeWorkPref("from-home")}}
-                            style={{backgroundColor: workChoicesColor[1]}}
-                            className="checkbox"></div>
+                            className={workChoicesColor[1]==="blue" ? "checkedd checkbox":"checkbox"}></div>
                             <pre>  From Home</pre>
                         </div>
                         <div className="choice d-flex">
                             <div
-                            onClick={() => {toggleWorkColor(2); changeWorkPref("hybrid")}}
-                            style={{backgroundColor: workChoicesColor[2]}} 
-                            className="checkbox"></div>
+                            onClick={() => {toggleWorkColor(2); changeWorkPref("hybrid")}} 
+                            className={workChoicesColor[2]==="blue" ? "checkedd checkbox":"checkbox"}></div>
                             <pre>  Hybrid</pre>
                         </div>
                     </div>
@@ -104,15 +102,13 @@ const Covid = ({toggleCoordinates, debug,showCovid, toggleCovid, toggleSkills, t
                         <div className="choice d-flex">
                             <div 
                             onClick={() => {toggleCovidColor(0); toggleCovidContact(true)}}
-                            style={{backgroundColor: covidChoicesColor[0]}}
-                            className="checkbox"></div>
+                            className={covidChoicesColor[0]==="blue" ? "checkedd checkbox":"checkbox"}></div>
                             <pre>  Yes</pre>
                         </div>
                         <div className="choice d-flex">
                             <div 
                             onClick={() => {toggleCovidColor(1); toggleCovidContact(false)}}
-                            style={{backgroundColor: covidChoicesColor[1]}}
-                            className="checkbox"></div>
+                            className={covidChoicesColor[1]==="blue" ? "checkedd checkbox":"checkbox"}></div>
                             <pre>  No</pre>
                         </div>
                     </div>
@@ -129,15 +125,13 @@ const Covid = ({toggleCoordinates, debug,showCovid, toggleCovid, toggleSkills, t
                         <div className="choice d-flex">
                             <div 
                             onClick={() => {toggleVacColor(0); toggleVaccinated(true);}}
-                            style={{backgroundColor: vacChoicesColor[0]}}
-                            className="checkbox"></div>
+                            className={vacChoicesColor[0]==="blue" ? "checkedd checkbox":"checkbox"}></div>
                             <pre>  Yes</pre>
                         </div>
                         <div className="choice d-flex">
                             <div 
                             onClick={() => {toggleVacColor(1); toggleVaccinated(false)}}
-                            style={{backgroundColor: vacChoicesColor[1]}}
-                            className="checkbox"></div>
+                            className={vacChoicesColor[1]==="blue" ? "checkedd checkbox":"checkbox"}></div>
                             <pre>  No</pre>
                         </div>
                     </div>
