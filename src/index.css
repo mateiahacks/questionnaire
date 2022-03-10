@@ -129,8 +129,8 @@ form > .btn {
 
 .right {
   width: 100%;
-  right: 0;
   padding: 80px 100px 100px 150px;
+  position: sticky;
   background-color: #0C0D0E;
 }
 .left > h1, .right > h1 {
@@ -427,6 +427,14 @@ div.form-input {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.right > * {
+  position: fixed;
+}
+
+.right > p {
+  top: 250px;
 }
 
 @media only screen and (max-width: 1200px) {
